@@ -1,0 +1,37 @@
+
+*.tmp.*
+
+## Godot-specific
+# Godot 4+ editor/server config folder (machine-specific)
+.godot/
+# Imported resource files (auto-generated)
+.import/
+# Godot export files and temporary build folders
+.export/
+.mono/
+*.pck
+*.zip
+
+## Project/Editor settings you may want to exclude
+# Export presets can contain sensitive/signing keys. Commit if you need team-shared presets.
+export_presets.cfg
+
+## OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## IDE / Editor folders
+.vscode/
+.idea/
+*.iml
+
+## Temporary / build files
+tmp/
+build/
+logs/
+*.log
+*.tmp
+
+# End of file
+
