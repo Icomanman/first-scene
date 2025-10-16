@@ -30,7 +30,7 @@ material_override = SubResource("StandardMaterial3D_ig7tw")
 mesh = SubResource("SphereMesh_0xm2m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.9617924, 0.12882248, -0.2415786, -0.0042979945, 0.8751693, 0.4837981, 0.2737462, 0.4663516, -0.84117746, 0.0901109, 5.086726, -8.08259)
+transform = Transform3D(-0.3853907, 0, -0.92275345, 0, 1, 0, 0.92275345, 0, -0.38539073, -5.9, 2, -3.42)
 script = ExtResource("1_sugp2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

@@ -2,9 +2,9 @@ extends CharacterBody3D
 
 const JUMP_VELOCITY: float = 5.0
 
-@export var _walk_speed: float = 15.0
+@export var _walk_speed: float = 10.0
 @export var _acc: float = _walk_speed * 2.0
-#@export var _decc: float = 4.0
+@export var _dec: float = _walk_speed * 2.5
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -12,7 +12,7 @@ var _dir: Vector3
 var _xz_velocity: Vector3
 
 func move(dir: Vector3) -> void:
-    _dir = dir  
+    _dir = dir
 
 func _physics_process(delta: float) -> void:
     # Add the gravity.
@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
     if _dir:
         _xz_velocity = _xz_velocity.move_toward(_dir * _walk_speed, delta * _acc)
     else:
-        _xz_velocity = _xz_velocity.move_toward(Vector3.ZERO, delta * _acc)
+        _xz_velocity = _xz_velocity.move_toward(Vector3.ZERO, delta * _dec)
 
     velocity.x = _xz_velocity.x
     velocity.z = _xz_velocity.z
