@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8lvu1bqhu4v2"]
+[gd_scene load_steps=6 format=3 uid="uid://8lvu1bqhu4v2"]
 
 [ext_resource type="Script" uid="uid://c8pnbe7vwcq8e" path="res://scripts/char.gd" id="1_njpxk"]
 
@@ -9,6 +9,8 @@ albedo_color = Color(0.015686275, 1, 1, 1)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_njpxk"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_wojmw"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07546592, 0, 0)
@@ -22,3 +24,10 @@ mesh = SubResource("CapsuleMesh_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
 shape = SubResource("CapsuleShape3D_njpxk")
 debug_color = Color(0.27058825, 0.2, 1, 0.99215686)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("SeparationRayShape3D_wojmw")
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
