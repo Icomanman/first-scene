@@ -1,19 +1,28 @@
 ## Classes
 ```mermaid
 classDiagram
+    %% Base Classes
     Node <|-- Camera
     Node <|-- Character
     Node <|-- Player
     Node <|-- Registry
     Node <|-- SpringArm3D
-    Player o-- Character
-    Character o-- SpringArm3D
-    SpringArm3D o-- Camera
+    %% Inheritance
+    Character <|-- Bean
+    Character <|-- Sphere
+    %% Aggregation
+    Character *-- SpringArm3D
+    Player *-- Character
+    SpringArm3D *-- Camera
+    %% Composition
+    Character o-- Dynamics
+    %% Dependencies
+    Player ..> SpringArm3D
     class Node {
     }
     class Player {
-        +CharacterBody3D _char
-        +SpringArm3D _cam_arm
+        +_char: CharacterBody3D 
+        -_cam_arm: SpringArm3D
         -_input_dir: Vector2
         -_char_dir: Vector3
     }
@@ -24,11 +33,12 @@ classDiagram
         +zoom(): void
     }
     class Character {
-        +SpringArm3D _cam_arm
-        +string name
+        +_cam_arm: SpringArm3D
+        +name: string
         +walk_speed: float
         +acc: float
         +dec: float
+        +dynamics: Dynamics
 
         -gravity: float
         -_dir: Vector3
@@ -37,10 +47,26 @@ classDiagram
         +move(Vector3 dir): void
         +jump(): void
     }
+    class Dynamics {
+        +density: float
+        +friction: float
+        +bounce: float
+        -mass: float
+        -volume: float
+    }
     class SpringArm3D {
         +length: float
     }
-
+    %% Derived Classes
+    class Bean {
+        +radius: float
+        +height: float
+    }
+    class Sphere {
+        +radius: float
+        +height: float
+    }
+    %% Utils/Singletons
     class Registry {
         +static instance: Registry
         +get_instance(): Registry
