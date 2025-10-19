@@ -11,8 +11,19 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _dir: Vector3
 var _xz_velocity: Vector3
 
+# var _target_rot: Vector3
+# var _target_dist: float
+# var _mouse_motion: InputEventMouseMotion
+# var _pitch: float
+# var _yaw: float
+
 func move(dir: Vector3) -> void:
     _dir = dir
+
+func _process(_delta: float) -> void:
+    # arm logic
+    # _mouse_motion = InputEventMouseMotion()
+    pass
 
 func _physics_process(delta: float) -> void:
     # Add the gravity.

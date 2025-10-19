@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://b50gg3j3tr4rh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.035646033, 0.1534676, 0.03540055, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0wfyh"]
+top_radius = 20.0
+bottom_radius = 20.0
+height = 0.5
+
+[sub_resource type="Skin" id="Skin_0xm2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
+albedo_color = Color(0.28627452, 0.2509804, 0.1764706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sugp2"]
+material = SubResource("StandardMaterial3D_0wfyh")
+top_radius = 20.0
+bottom_radius = 20.0
+height = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+albedo_color = Color(0.28733832, 0.24972987, 0.17455384, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_sugp2"]
+material = SubResource("StandardMaterial3D_jyhfs")
+inner_radius = 10.0
+outer_radius = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(35, 0.25, 35)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = SubResource("StandardMaterial3D_7dm0k")
+mesh = SubResource("CylinderMesh_0wfyh")
+skin = SubResource("Skin_0xm2m")
+skeleton = NodePath("../..")
+
+[node name="Mid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+mesh = SubResource("CylinderMesh_sugp2")
+
+[node name="Raft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.5, 0)
+mesh = SubResource("TorusMesh_sugp2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_0xm2m")

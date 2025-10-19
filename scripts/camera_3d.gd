@@ -12,8 +12,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     if _dir:
-        position.x = -_dir.x
+        position.x = - _dir.x
         position.y = _dir.y
-        position.z = -_dir.z
+        position.z = - _dir.z
