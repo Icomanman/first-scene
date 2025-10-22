@@ -7,6 +7,7 @@ classDiagram
     Node <|-- Player
     Node <|-- Registry
     Node <|-- SpringArm3D
+    RefCounted <|-- Dynamics
     %% Inheritance
     Character <|-- Bean
     Character <|-- Sphere
@@ -48,11 +49,11 @@ classDiagram
         +jump(): void
     }
     class Dynamics {
-        +density: float
         +friction: float
-        +bounce: float
-        -mass: float
+        +mass: float
+        -density: float
         -volume: float
+        +bounce(): Vector3
     }
     class SpringArm3D {
         +length: float

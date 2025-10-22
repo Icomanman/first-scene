@@ -6,6 +6,7 @@ const JUMP_VELOCITY: float = 5.0
 @export var acc: float = walk_speed * 2.0
 @export var dec: float = walk_speed * 2.5
 
+var dynamics: Dynamics
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _dir: Vector3
@@ -47,3 +48,7 @@ func _physics_process(delta: float) -> void:
     velocity.x = _xz_velocity.x
     velocity.z = _xz_velocity.z
     move_and_slide()
+
+func _ready() -> void:
+    # TODO
+    pass
