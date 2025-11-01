@@ -1,7 +1,11 @@
-# 
+# Dynamics component
 class_name Dynamics
 extends RefCounted
 
+# ****************
+# member variables
+# ****************
+var body: CharEntity
 var friction: float = 0.1
 var restitution: float = 0.5
 var normal: Vector3 = Vector3.ZERO
@@ -9,18 +13,9 @@ var normal: Vector3 = Vector3.ZERO
 var _density: float = 1.0
 var _volume: float = 1.0
 
-func _init() -> void:
-    print("Dynamics initialized")
-
-# helper: rotational contribution for a direction d (n or tangent)
-func _rot_term(r: Vector3, d: Vector3, invI: float) -> float:
-    # returns scalar d · ( (invI * (r x d)) x r )
-    if invI == 0.0:
-        return 0.0
-    var tmp = r.cross(d) * invI
-    return d.dot(tmp.cross(r))
-
-# methods
+# ***************
+# member methods
+# ***************
 func bounce(hits: Array[Node]) -> void:
     # hits[0].velocity = hits[0].velocity.move_toward(self._dir * self.walk_speed)
     print("Bounce called on ", self, " with hits: ", hits)
@@ -153,3 +148,18 @@ func set_volume(value: float) -> void:
 
 func set_density(value: float) -> void:
     _density = value
+# 
+# helper: rotational contribution for a direction d (n or tangent)
+func _rot_term(r: Vector3, d: Vector3, invI: float) -> float:
+    # returns scalar d · ( (invI * (r x d)) x r )
+    if invI == 0.0:
+        return 0.0
+    var tmp = r.cross(d) * invI
+    return d.dot(tmp.cross(r))
+
+# ****************
+# Built-in methods
+# *****************
+func _init(char_obj: CharEntity) -> void:
+    body = char_obj
+    print("Dynamics initialised; body assigned.")

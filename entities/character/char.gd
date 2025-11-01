@@ -1,3 +1,5 @@
+# Character entity script
+class_name CharEntity
 extends CharacterBody3D
 
 const JUMP_VELOCITY: float = 5.0
@@ -6,27 +8,35 @@ const JUMP_VELOCITY: float = 5.0
 @export var acc: float = walk_speed * 2.0
 @export var dec: float = walk_speed * 2.5
 
+# *****************
+# member variables
+# *****************
 var collsion_handler: CollisionHandler
 var dynamics: Dynamics
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-
+# 
 var _collided: bool
 var _collisions_arr: Array[KinematicCollision3D]
 var _dir: Vector3
 var _xz_velocity: Vector3
-
 # var _target_rot: Vector3
 # var _target_dist: float
 # var _mouse_motion: InputEventMouseMotion
 # var _pitch: float
 # var _yaw: float
 
-signal collision_event(Array)
+# *******
+# signals
+# *******
+signal collision_event(CharEntity, Array)
 
 
+# ***************
+# member methods
+# ***************
 func move(dir: Vector3) -> void:
     _dir = dir
-
+# 
 func _get_collisions() -> Array[KinematicCollision3D]:
     var _collisions: Array[KinematicCollision3D] = []
     var _collision_count: int = get_slide_collision_count()
@@ -34,7 +44,15 @@ func _get_collisions() -> Array[KinematicCollision3D]:
         _collisions.append(get_slide_collision(i))
     return _collisions
 
-# Built-in process function.
+
+# ****************
+# Built-in methods
+# *****************
+func _init() -> void:
+    collsion_handler = CollisionHandler.new()
+    dynamics = Dynamics.new(self)
+    # 
+    collision_event.connect(collsion_handler.on_collision)
 
 func _process(_delta: float) -> void:
     # arm logic
@@ -66,14 +84,10 @@ func _physics_process(delta: float) -> void:
     _collided = move_and_slide()
     if _collided:
         _collisions_arr = _get_collisions()
-        emit_signal("collision_event", _collisions_arr)
+        emit_signal("collision_event", self, _collisions_arr)
     else:
         _collisions_arr = []
 
 func _ready() -> void:
-    collsion_handler = CollisionHandler.new()
-    dynamics = Dynamics.new()
     _dir = Vector3.ZERO
     _xz_velocity = Vector3.ZERO
-    # 
-    collision_event.connect(collsion_handler.on_collision)
